@@ -8,9 +8,11 @@ import java.util.List;
 public class LinkedList_deleteOperations{
 
 	Node head;
+	int lengthOfList;
 
 	public LinkedList_deleteOperations(){
 		head = null;
+		lengthOfList=0;
 	}
 
 	public String deleteByIndex(int indexValue){
@@ -36,6 +38,7 @@ public class LinkedList_deleteOperations{
 			else{
 				prev.next = current.next;
 			}
+			lengthOfList--;
 			return "Value at index " + indexValue + " deleted successfully"; 
 
 
@@ -63,6 +66,7 @@ public class LinkedList_deleteOperations{
 			else{
 				prev.next = current.next;
 			}
+			lengthOfList--;
 			return valueToDelete + " deleted successfully";
 		}
 	}
@@ -78,6 +82,35 @@ public class LinkedList_deleteOperations{
 			while(currentNode.next!=null)
 				currentNode = currentNode.next;
 			currentNode.next = tempNode;
+		}
+		lengthOfList++;
+	}
+	
+	public String deleteFromMid(){
+		int counter = 0;
+		Node prev= null;
+		Node current = head;
+		int deletedVal = Integer.MIN_VALUE;
+		
+		if(current==null)
+			return "List is empty";
+		else{
+			while(counter<lengthOfList/2-1){
+				prev = current;
+				current = current.next;
+				counter++;
+			}
+			/*if(current.next==null){
+				deletedVal = current.data;
+				prev.next = null;
+			}
+			else{
+				deletedVal = current.data;		//Manual logic for delete at Index
+				prev.next = current.next;
+			}
+			lengthOfList--;*/
+			return deleteByIndex(counter);
+			
 		}
 	}
 	
@@ -108,6 +141,7 @@ public class LinkedList_deleteOperations{
 				}
 			}
 		}
+		lengthOfList-=duplicateCount;
 		return duplicateCount+" duplicates deleted";
 	}
 
@@ -126,6 +160,8 @@ public class LinkedList_deleteOperations{
 		deleteOperations.addToList(20);
 		addedValues.add(40);
 		System.out.println(deleteOperations.removeDuplicatesFromList());
+		deleteOperations.printList();
+		System.out.println(deleteOperations.deleteFromMid());
 //		System.out.println(deleteOperations.deleteByIndex(addedValues.size()-1));
 		//		addedValues.remove(addedValues.size()-3);
 		deleteOperations.printList();
