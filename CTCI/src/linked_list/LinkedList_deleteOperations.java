@@ -5,13 +5,13 @@ import java.util.List;
 
 
 public class LinkedList_deleteOperations{
-	
+
 	Node head;
-	
+
 	public LinkedList_deleteOperations(){
 		head = null;
 	}
-	
+
 	public String deleteOperation(int valueToDelete){
 		Node current = head;
 		Node prev = null;
@@ -22,22 +22,21 @@ public class LinkedList_deleteOperations{
 			while(current.data!=valueToDelete){
 				prev = current;
 				current = current.next;
-			}
-			if(current!=null){
-				if(prev==null){
-					current = current.next;
-					head = current;
+				if(current.next==null && current.data!=valueToDelete){
+					return "Value "+ valueToDelete +" Not Found";
 				}
-				else{
+			}
+			if(prev==null){
+				current = current.next;
+				head = current;
+			}
+			else{
 				prev.next = current.next;
-				}
-				return valueToDelete + " deleted successfully";
-				
 			}
-			return "Nothing found ";
+			return valueToDelete + " deleted successfully";
 		}
 	}
-	
+
 	public void addToList(int newData){
 		Node tempNode = new Node(newData);
 		Node currentNode = head;
@@ -51,7 +50,7 @@ public class LinkedList_deleteOperations{
 			currentNode.next = tempNode;
 		}
 	}
-	
+
 	public static void main(String[]args){
 		LinkedList_deleteOperations deleteOperations = new LinkedList_deleteOperations();
 		List<Integer> addedValues = new ArrayList<Integer>();
@@ -59,12 +58,12 @@ public class LinkedList_deleteOperations{
 			deleteOperations.addToList(i*5);
 			addedValues.add(i*5);
 		}
-		System.out.println(deleteOperations.deleteOperation(addedValues.get(addedValues.size()-3)));
-		addedValues.remove(addedValues.size()-3);
+		System.out.println(deleteOperations.deleteOperation(12));
+		//		addedValues.remove(addedValues.size()-3);
 		deleteOperations.printList();
-		
+
 	}
-	
+
 	private void printList() {
 		Node current = head;
 		if(head==null)
@@ -76,7 +75,7 @@ public class LinkedList_deleteOperations{
 			}
 			System.out.print(current.data + "---> Nil");
 		}
-		
+
 	}
 
 	class Node{
@@ -88,5 +87,5 @@ public class LinkedList_deleteOperations{
 			previous = null;
 		}
 	}
-	
+
 }
