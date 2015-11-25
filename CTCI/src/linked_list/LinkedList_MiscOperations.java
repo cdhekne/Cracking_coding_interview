@@ -35,28 +35,22 @@ public class LinkedList_MiscOperations {
 		lengthOfList++;
 	}
 
-
 	public void findNthToLastElement(int nValue){
-		Node prev = null;
 		Node current = head;
 		int indexValue = nValue-1;
 		int counter = 0;
-		boolean indexFlag = false;
 		if(head==null)
 			System.out.println("List is empty");
 		else{
-//			if(indexValue!=0){ 	
-				while(counter<indexValue){
-					prev = current;
-					current = current.next;
-					counter++;
-				}
-				while(current.next!=null){
-					System.out.print(current.data+ "-->");
-					current = current.next;
-				}
-				System.out.println(current.data + "--> Nil");
-//			}
+			while(counter<indexValue){
+				current = current.next;
+				counter++;
+			}
+			while(current.next!=null){
+				System.out.print(current.data+ "-->");
+				current = current.next;
+			}
+			System.out.println(current.data + "--> Nil");
 		}
 	}
 
