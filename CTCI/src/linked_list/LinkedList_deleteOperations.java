@@ -1,56 +1,43 @@
 package linked_list;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public class LinkedList_deleteOperations {
 
+public class LinkedList_deleteOperations{
+	
 	Node head;
+	
 	public LinkedList_deleteOperations(){
-		head = null;	
+		head = null;
 	}
-
-	public void deleteFromIndex(int index){
-		Node nodeToDelete = null;
+	
+	public String deleteOperation(int valueToDelete){
 		Node current = head;
-		int i=0;
-		if (head==null)
-			System.out.println("List is empty");
+		Node prev = null;
+		if(head==null){
+			return "List is empty";
+		}
 		else{
-			while(i<index-1){
-				if(current!=null){
+			while(current.data!=valueToDelete){
+				prev = current;
+				current = current.next;
+			}
+			if(current!=null){
+				if(prev==null){
 					current = current.next;
-					i++;
+					head = current;
 				}
 				else{
-					System.out.println("No data found at index");
-					System.exit(0);
+				prev.next = current.next;
 				}
+				return valueToDelete + " deleted successfully";
 				
 			}
-			nodeToDelete = current.next;
-			if(nodeToDelete==null)
-				System.out.println("No data found at index");
-			else if (nodeToDelete.next == null){
-				current.next = null;
-				System.out.println("Value " + nodeToDelete.data  + " is deleted.");
-			}
-			else{
-				current.next = nodeToDelete.next;
-				System.out.println("Value " + nodeToDelete.data  + " is deleted.");
-			}
-
+			return "Nothing found ";
 		}
-
 	}
-
-	public void printList(){
-		Node currentNode = head;
-		while(currentNode.next!=null){
-			System.out.print(currentNode.data+"-->");
-			currentNode = currentNode.next;
-		}
-		System.out.print(currentNode.data+"-->null");
-	}
-
+	
 	public void addToList(int newData){
 		Node tempNode = new Node(newData);
 		Node currentNode = head;
@@ -64,29 +51,42 @@ public class LinkedList_deleteOperations {
 			currentNode.next = tempNode;
 		}
 	}
-
-	class Node{
-		Node next;
-		int data;
-
-		public Node(int data){
-			next = null;
-			this.data = data;
-		}
-	}
-	public static void main(String[] args) {
+	
+	public static void main(String[]args){
 		LinkedList_deleteOperations deleteOperations = new LinkedList_deleteOperations();
-
-		deleteOperations.addToList(12);
-		deleteOperations.addToList(11);
-		deleteOperations.addToList(15);
-		deleteOperations.addToList(18);
-		deleteOperations.addToList(17);
-		deleteOperations.addToList(16);
+		List<Integer> addedValues = new ArrayList<Integer>();
+		for(int i = 0;i< 10;i++){
+			deleteOperations.addToList(i*5);
+			addedValues.add(i*5);
+		}
+		System.out.println(deleteOperations.deleteOperation(addedValues.get(addedValues.size()-3)));
+		addedValues.remove(addedValues.size()-3);
 		deleteOperations.printList();
 		
-		deleteOperations.deleteFromIndex(5);
-		deleteOperations.printList();
+	}
+	
+	private void printList() {
+		Node current = head;
+		if(head==null)
+			System.out.println("List is empty");
+		else{
+			while(current.next!=null){
+				System.out.print(current.data + "-->");
+				current = current.next;
+			}
+			System.out.print(current.data + "---> Nil");
+		}
+		
 	}
 
+	class Node{
+		int data;
+		Node next,previous;
+		public Node(int data){
+			this.data = data;
+			next=null;
+			previous = null;
+		}
+	}
+	
 }
