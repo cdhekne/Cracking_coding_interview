@@ -12,6 +12,35 @@ public class LinkedList_deleteOperations{
 		head = null;
 	}
 
+	public String deleteByIndex(int indexValue){
+		Node prev = null;
+		Node current =head;
+		int listIndexIterator = 0;
+		if(head==null)
+			return "List empty";
+		else{
+			while(listIndexIterator < indexValue){
+				if(current.next == null)
+					return "Index out of bounds";
+				else{
+					prev = current;
+					current = current.next;
+					listIndexIterator++;
+				}
+			}
+			if(prev==null){
+				current = current.next;
+				head = current;
+			}
+			else{
+				prev.next = current.next;
+			}
+			return "Value at index " + indexValue + " deleted successfully"; 
+
+
+		}
+	}
+
 	public String deleteOperation(int valueToDelete){
 		Node current = head;
 		Node prev = null;
@@ -58,7 +87,8 @@ public class LinkedList_deleteOperations{
 			deleteOperations.addToList(i*5);
 			addedValues.add(i*5);
 		}
-		System.out.println(deleteOperations.deleteOperation(12));
+		//		System.out.println(deleteOperations.deleteOperation(12));
+		System.out.println(deleteOperations.deleteByIndex(addedValues.size()-1));
 		//		addedValues.remove(addedValues.size()-3);
 		deleteOperations.printList();
 
