@@ -1,6 +1,7 @@
 package linked_list;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 
@@ -79,6 +80,36 @@ public class LinkedList_deleteOperations{
 			currentNode.next = tempNode;
 		}
 	}
+	
+	public String removeDuplicatesFromList(){
+		Node current = head;
+		Node prev = null;
+		int duplicateCount = 0;
+		if(head==null)
+			return "List not initialized";
+		else{
+			HashSet<Integer> uniqueValueSet = new HashSet<Integer>();
+			while(current!=null){
+				if(!(uniqueValueSet.contains(current.data))){
+					uniqueValueSet.add(current.data);
+					prev = current;
+					current = current.next;
+				}
+				else{
+					if(prev==null){ //Delete at head
+						current = current.next;
+						head = current;
+					}
+					else{
+						prev.next = current.next;
+						current = current.next;
+					}
+					duplicateCount++;
+				}
+			}
+		}
+		return duplicateCount+" duplicates deleted";
+	}
 
 	public static void main(String[]args){
 		LinkedList_deleteOperations deleteOperations = new LinkedList_deleteOperations();
@@ -88,13 +119,21 @@ public class LinkedList_deleteOperations{
 			addedValues.add(i*5);
 		}
 		//		System.out.println(deleteOperations.deleteOperation(12));
-		System.out.println(deleteOperations.deleteByIndex(addedValues.size()-1));
+		deleteOperations.addToList(40);
+		addedValues.add(40);
+		deleteOperations.addToList(40);
+		addedValues.add(40);
+		deleteOperations.addToList(20);
+		addedValues.add(40);
+		System.out.println(deleteOperations.removeDuplicatesFromList());
+//		System.out.println(deleteOperations.deleteByIndex(addedValues.size()-1));
 		//		addedValues.remove(addedValues.size()-3);
 		deleteOperations.printList();
 
 	}
-
-	private void printList() {
+	
+	
+	public void printList() {
 		Node current = head;
 		if(head==null)
 			System.out.println("List is empty");
