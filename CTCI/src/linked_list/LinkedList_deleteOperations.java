@@ -178,18 +178,17 @@ public class LinkedList_deleteOperations{
 				System.out.print(current.data + "-->");
 				current = current.next;
 			}
-			System.out.print(current.data + "---> Nil");
+			System.out.println(current.data + "---> Nil");
 		}
 
 	}
 
 	class Node{
 		int data;
-		Node next,previous;
+		Node next;
 		public Node(int data){
 			this.data = data;
 			next=null;
-			previous = null;
 		}
 	}
 
