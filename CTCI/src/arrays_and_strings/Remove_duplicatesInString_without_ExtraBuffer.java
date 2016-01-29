@@ -1,36 +1,40 @@
 package arrays_and_strings;
 
-import java.util.HashMap;
+import java.util.Arrays;
 
 public class Remove_duplicatesInString_without_ExtraBuffer {
 
 	public String removeDuplicates(String input){
-		
-		String distinctString = "";
-		HashMap<Character, Boolean> characters = new HashMap<Character,Boolean>();
-		char[] charArr = input.toCharArray();
-		int iterator = 0;
-		while(iterator<input.length()){
-			if(characters.isEmpty()){
-				characters.put(charArr[iterator], true);
-			distinctString+=charArr[iterator++];
-			}
-			else if(characters.containsKey(charArr[iterator])){
-				iterator++;
+
+		char[] inpArr = input.toCharArray();
+
+		Arrays.sort(inpArr);
+		String inp = new String(inpArr);
+		//System.out.println(inp);
+		StringBuilder sb = new StringBuilder(inp);
+		char temp = sb.charAt(0);
+
+		for(int i=1; i<sb.length(); i++){
+
+			if(temp == sb.charAt(i)){
+
+				sb.deleteCharAt(i);
+				i--;
 			}
 			else{
-				characters.put(charArr[iterator], true);
-				distinctString+=charArr[iterator++];
+
+				temp = sb.charAt(i);
 			}
 		}
-		
-		return distinctString;
+
+
+		return sb.toString();
 	}
-	
+
 	public static void main(String[] args) {
-		
+
 		Remove_duplicatesInString_without_ExtraBuffer duplicatesInString_without_ExtraBuffer = new Remove_duplicatesInString_without_ExtraBuffer();
-		System.out.println(duplicatesInString_without_ExtraBuffer.removeDuplicates("chinmmmmay"));
+		System.out.println(duplicatesInString_without_ExtraBuffer.removeDuplicates("avaniuuuuasd"));
 	}
 
 }

@@ -5,7 +5,7 @@ import java.util.Iterator;
 public class ReplaceStringSpaces {
 
 	public String replaceSpaces(String input){
-		String finalString = "";
+		/*String finalString = "";
 		
 		String[]inpArray = input.split(" ");
 		
@@ -13,7 +13,9 @@ public class ReplaceStringSpaces {
 			finalString+=string+"%20";
 		}
 		finalString = finalString.substring(0,finalString.length()-3);	
-		return finalString;
+		return finalString;*/
+		
+		return input.replaceAll(" ", "%20");
 	}
 	
 	public static void main(String[] args) {

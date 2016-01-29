@@ -6,16 +6,16 @@ public class Reverse_C_Style_String {
 
 	public String reverseString(String input){
 		
-		String reveresedString = "";
-		char[] charArray = input.toCharArray();
-		Stack<Character> stringStack = new Stack<Character>();
-		for(int i=0;i<input.length();i++){
-			stringStack.push(charArray[i]);
+		Stack<Character> charStack = new Stack<Character>();
+		for(char c :input.toCharArray()){
+			charStack.push(c);
 		}
-		while(!stringStack.isEmpty()){
-			reveresedString+=stringStack.pop();
+		String op="";
+		while(!charStack.isEmpty()){
+			op+=charStack.pop();
 		}
-		return reveresedString;
+			
+		return op;
 	}
 	
 	public static void main(String[] args) {

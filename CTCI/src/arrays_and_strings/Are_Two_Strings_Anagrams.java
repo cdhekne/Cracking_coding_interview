@@ -3,6 +3,8 @@ package arrays_and_strings;
 import java.util.*;
 import java.util.HashMap;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
+
 public class Are_Two_Strings_Anagrams {
 
 	public boolean areStringsAnagrams(String ip1,String ip2){
@@ -24,7 +26,9 @@ public class Are_Two_Strings_Anagrams {
 
 			}
 		}
-		 */
+		 */ 
+		
+		//Method 1
 		if(ip1.length()!=ip2.length())
 			return false;
 		else{
@@ -37,6 +41,7 @@ public class Are_Two_Strings_Anagrams {
 			else
 				return false;
 		}
+		
 	}
 
 	public static void main(String[] args) {
