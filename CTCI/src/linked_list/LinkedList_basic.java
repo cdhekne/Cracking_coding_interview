@@ -1,81 +1,107 @@
 package linked_list;
 
-public class LinkedList_basic {
+import java.util.HashMap;
 
+public class LinkedList_basic{
+	
 	Node head;
 	
-	public LinkedList_basic(){
-		head = null;
+	public static void main(String []args){
+		LinkedList_basic linkedList_basic = new LinkedList_basic();
+		linkedList_basic.addToEndOfList(12);
+		linkedList_basic.addToEndOfList(1);
+		linkedList_basic.addToEndOfList(123);
+		linkedList_basic.addToEndOfList(12);
+		linkedList_basic.addToEndOfList(23);
+		linkedList_basic.addToEndOfList(123);
+//		linkedList_basic.printList();
+//		linkedList_basic.removeDuplicates();
+		linkedList_basic.findNthToLastElements(2);
+		
+		
 	}
-	
-	public void addToList(int newData){
-		Node tempNode = new Node(newData);
+
+	private void findNthToLastElements(int index) {
 		Node currentNode = head;
-		if(head == null){
-			head= tempNode;
-			head.next=null;
+		int counter=0;
+		if (currentNode==null){
+			System.out.println("List is empty..");
+		}
+		else{
+			while(counter<index && currentNode.next!=null){
+				currentNode = currentNode.next;
+				counter++;
+			}
+			while(currentNode.next!=null){
+				System.out.print(currentNode.data+"-->");
+				currentNode = currentNode.next;
+			}
+			System.out.println(currentNode.data+"-->NILL");
+		}
+	}
+
+	private void removeDuplicates() {
+		Node currentNode = head;
+		Node previousNode = null;
+		HashMap<Integer, Boolean> hashMapForData = new HashMap<Integer, Boolean>();
+		
+		if(currentNode==null){
+			System.out.println("List is empty..No duplicates found");
+		}
+		else{
+			while(currentNode!=null){
+				if(!hashMapForData.containsKey(currentNode.data)){
+					hashMapForData.put(currentNode.data, true);
+					previousNode = currentNode;
+				}
+				else{
+					previousNode.next = currentNode.next;
+					
+				}
+				
+				currentNode = currentNode.next;
+			}
+		}
+		printList();
+		
+	}
+
+	private void printList() {
+		Node currentNode = head;
+		if(head==null)
+			System.out.println("List is empty");
+		
+		else{
+			while(currentNode.next!=null){
+				System.out.print(currentNode.data+"-->");
+				currentNode = currentNode.next;
+			}
+			System.out.println(currentNode.data+"-->NILL");
+		}
+	}
+
+	private void addToEndOfList(int data) {
+		Node temp = new Node(data);
+		Node currentNode = head;
+		if(currentNode==null){
+			head = temp;
+			head.next = null;
 		}
 		else{
 			while(currentNode.next!=null)
 				currentNode = currentNode.next;
-			currentNode.next = tempNode;
+			currentNode.next = temp;
 		}
 	}
-	
-	public void printList(){
-		Node currentNode = head;
-		while(currentNode.next!=null){
-			System.out.print(currentNode.data+"-->");
-			currentNode = currentNode.next;
-		}
-		System.out.print(currentNode.data+"-->null");
-	}
-	
-	/*public void addAtIndex(int newData, int index){
-		Node tempNode = new Node(newData);
-		Node currentNode = head;
-		if(head==null && index>0){
-			System.out.println("Invalid Index ");
-			System.exit(0);
-		}
-		else if(head==null){
-			head= tempNode;
-			head.next=null;
-		}
-		else{
-			int i=0;
-			while(i<index-1){
-				currentNode = currentNode.next;
-				i+=1;
-			}				
-			tempNode.next = currentNode.next;
-			currentNode.next = tempNode;
-		}
-	}*/
-	
-	
-	public static void main(String[] args) {
-		LinkedList_basic list_basic = new LinkedList_basic();
 
-		list_basic.addToList(12);
-		list_basic.addToList(11);
-		list_basic.addToList(15);
-		list_basic.addToList(18);
-		list_basic.addToList(17);
-		list_basic.addToList(16);
-		list_basic.printList();
-	}
-	private class Node{
+	protected class Node{
+		
 		Node next;
 		int data;
 		
-		public Node(int d){
-			next = null;
-			data = d;
+		public Node(int data){
+			this.data = data;
 		}
 	}
 	
-	
 }
-
-
