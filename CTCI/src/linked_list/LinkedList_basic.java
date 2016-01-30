@@ -16,12 +16,35 @@ public class LinkedList_basic{
 		linkedList_basic.addToEndOfList(123);
 //		linkedList_basic.printList();
 //		linkedList_basic.removeDuplicates();
-		linkedList_basic.findNthToLastElements(2);
+//		linkedList_basic.printNthToLastElement(2);
+		linkedList_basic.findNthToLastElement(2);
+		
 		
 		
 	}
 
-	private void findNthToLastElements(int index) {
+	private void findNthToLastElement(int i) {
+		Node currentNode = head;
+		Node runnerNode = head;
+		int counter=0;
+		
+		if(currentNode==null)
+			System.out.println("link list emppty !");
+		else{
+			while(counter<i){
+				runnerNode = runnerNode.next;
+				counter++;
+			}
+		}
+		while(runnerNode!=null){
+			currentNode= currentNode.next;
+			runnerNode = runnerNode.next;
+		}
+		System.out.println(currentNode.data);
+		
+	}
+
+	private void printNthToLastElement(int index) {
 		Node currentNode = head;
 		int counter=0;
 		if (currentNode==null){
