@@ -1,34 +1,62 @@
 package trees;
 
+import java.util.Stack;
+
 public class Basic_Tree_Operations {
 
 	Node root;
 
 	public static void main(String []args){
 		Basic_Tree_Operations tree_Operations = new Basic_Tree_Operations();
-		
+
 		tree_Operations.addElementToTree(50);
 		tree_Operations.addElementToTree(30);
 		tree_Operations.addElementToTree(60);
 		tree_Operations.addElementToTree(15);
 		tree_Operations.addElementToTree(45);
-//		tree_Operations.printTree();
-		
-		
-		
-		
-//		tree_Operations.findElementInBST(12);
+		tree_Operations.addElementToTree(55);
+		tree_Operations.addElementToTree(75);
+		tree_Operations.addElementToTree(10);
+		tree_Operations.addElementToTree(20);
+		tree_Operations.addElementToTree(12);
+		tree_Operations.addElementToTree(40);
+		tree_Operations.addElementToTree(48);
+
+		tree_Operations.printTreeInorder();
+
+
+
+
+		//		tree_Operations.findElementInBST(12);
 	}
-	private void printTree() {
+	private void printTreeInorder() {	// Left Child - Parent - Right Child
 		Node currentNode = root;
-		while(currentNode!=null){
-			
+		if(currentNode==null){
+			System.out.println("Tree is empty..Sorry");
+		}
+		else{
+			Stack<Node> treeNodeStack = new Stack<Node>();
+			while(currentNode!=null){		//Traverse to left most node of the tree while pushing each node on Stack 
+				treeNodeStack.push(currentNode);
+				currentNode = currentNode.left;
+			}
+			while(!treeNodeStack.isEmpty()){
+				currentNode = treeNodeStack.pop();
+				System.out.println(currentNode.data);
+				if(currentNode.right!=null){
+					currentNode = currentNode.right;
+					while(currentNode!=null){
+						treeNodeStack.push(currentNode);
+						currentNode = currentNode.left;
+					}
+				}
+			}
 		}
 	}
 	private void addElementToTree(int dataToAdd) {
 		Node temp = new Node(dataToAdd);
 		Node currentNode = root;
-		
+
 		if(currentNode==null){ //New Node is the root of the tree
 			currentNode = temp;
 			currentNode.left=null;
@@ -40,7 +68,7 @@ public class Basic_Tree_Operations {
 			{
 				if(dataToAdd>currentNode.data)
 					currentNode= currentNode.right;
-				
+
 				else if(dataToAdd<currentNode.data)
 					currentNode = currentNode.left;
 
@@ -60,7 +88,7 @@ public class Basic_Tree_Operations {
 			}
 			currentNode.left = null;
 			currentNode.right= null;
-			
+
 		}
 	}
 	private void findElementInBST(int dataToSearch) {
