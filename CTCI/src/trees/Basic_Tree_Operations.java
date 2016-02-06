@@ -18,18 +18,72 @@ public class Basic_Tree_Operations {
 		tree_Operations.addElementToTree(75);
 		tree_Operations.addElementToTree(10);
 		tree_Operations.addElementToTree(20);
+		tree_Operations.addElementToTree(9);
 		tree_Operations.addElementToTree(12);
 		tree_Operations.addElementToTree(40);
 		tree_Operations.addElementToTree(48);
 
 		tree_Operations.printTreeInorder();
+//		tree_Operations.printTreePreorder();
+		tree_Operations.printTreePreorder_alternate();
+		
 
-
-
-
-		//		tree_Operations.findElementInBST(12);
+		tree_Operations.findElementInBST(20);
+		
+	}
+	private void printTreePreorder_alternate() {
+		System.out.println("Preorder - Alternate");
+		Node currentNode = root;
+		Stack<Node> treeStackNode = new Stack<Node>();
+		
+		treeStackNode.push(currentNode);
+		while(!treeStackNode.isEmpty()){
+			currentNode=treeStackNode.pop();
+			System.out.println(currentNode.data);
+			if(currentNode.right!=null){
+				treeStackNode.push(currentNode.right);
+			}
+			if(currentNode.left!=null){
+				treeStackNode.push(currentNode.left);
+			}
+		}
+		
+		
+	}
+	private void printTreePreorder() {
+		System.out.println("Preorder: ");
+		Node currentNode = root;
+		if(currentNode==null){
+			System.out.println("Tree is null. Sorry");
+		}
+		else{
+			Stack<Node> treeNodeStack = new Stack<Node>();
+			while(currentNode!=null){
+				System.out.println(currentNode.data);
+				treeNodeStack.push(currentNode);
+				currentNode = currentNode.left;
+			}
+			while(!treeNodeStack.isEmpty()){
+				currentNode = treeNodeStack.pop();
+				if(currentNode.right!=null){
+					currentNode = currentNode.right;
+					System.out.println(currentNode.data);
+					while(currentNode!=null){
+						treeNodeStack.push(currentNode);
+						currentNode = currentNode.left;
+						if(currentNode!=null){
+							treeNodeStack.push(currentNode);
+							System.out.println(currentNode.data);
+						}
+					}
+				}
+			}
+			
+			
+		}
 	}
 	private void printTreeInorder() {	// Left Child - Parent - Right Child
+		System.out.println("Inorder: ");
 		Node currentNode = root;
 		if(currentNode==null){
 			System.out.println("Tree is empty..Sorry");
@@ -92,6 +146,7 @@ public class Basic_Tree_Operations {
 		}
 	}
 	private void findElementInBST(int dataToSearch) {
+		
 		Node currentNode = root;
 		if(currentNode==null){		//Tree is null
 			System.out.println("Tree is empty.");
@@ -100,12 +155,14 @@ public class Basic_Tree_Operations {
 			while(currentNode!=null){
 				if(dataToSearch<currentNode.data) 	//Go to left 
 					currentNode = currentNode.left;
-
 				else if(dataToSearch>currentNode.data)	//Go to right
-					currentNode = currentNode.left;
-				else if(dataToSearch==currentNode.data) //Data found
-					System.out.println("Element " + dataToSearch + "exists");
+					currentNode = currentNode.right;
+				else if(dataToSearch==currentNode.data){ //Data found
+					System.out.println("Element " + dataToSearch + " exists");
+					System.exit(0);
+				}
 			}
+			System.out.println("Not Found !");
 		}
 	}
 	public class Node{
