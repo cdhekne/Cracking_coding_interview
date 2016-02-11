@@ -1,5 +1,6 @@
 package trees;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class Basic_Tree_Operations {
@@ -29,6 +30,41 @@ public class Basic_Tree_Operations {
 		
 
 		tree_Operations.findElementInBST(20);
+		
+		ArrayList<Integer> arr = new ArrayList<Integer>();
+		for (int i=0;i<10;i++)
+			arr.add(i+1);
+		tree_Operations.createTreeWithMinHeight(arr);
+		tree_Operations.BfsTraversal();
+		
+	}
+	private void BfsTraversal() {
+		Node current = root;
+		if(current==null)
+			System.out.println("Tree is null");
+		else{
+			
+		}
+			
+	}
+	private void createTreeWithMinHeight(ArrayList<Integer> arr) {
+		Node current = root;
+		
+		for(int numberToAdd: arr){
+			Node temp = new Node(numberToAdd);
+			if(current==null){ 		//This is first element in the tree
+				current = temp;
+				current.left=null;
+				current.right=null;
+				root=temp;
+			}
+			else{
+				Node traverserNode = null;
+				while(current.left!=null){
+					
+				}
+			}
+		}
 		
 	}
 	private void printTreePreorder_alternate() {
