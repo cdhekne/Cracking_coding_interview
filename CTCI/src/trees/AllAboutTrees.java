@@ -33,7 +33,9 @@ public class AllAboutTrees {
 		trees.BFSTraversal();
 		System.out.println();
 		trees.DFSTraversal();
-
+		trees.postOrder();
+		trees.preOrder();
+		
 		AllAboutTrees trees1 = new AllAboutTrees();
 		TreeNode r = trees1.ctci4_3(arr,0, arr.length-1);
 		trees1.inorderTraversal();
@@ -45,6 +47,7 @@ public class AllAboutTrees {
 	 */
 
 	private void DFSTraversal() {
+		System.out.println("\nDFS:---");
 		Stack<TreeNode> stackForDFS = new Stack<TreeNode>();
 		if(root==null)
 			return;
@@ -60,8 +63,9 @@ public class AllAboutTrees {
 	}
 
 	private void BFSTraversal() {
+		System.out.println("\nBFS:---");
 		Queue<TreeNode> queueForBFS = new LinkedList<TreeNode>();
-		
+
 		if(root==null)
 			return;
 		queueForBFS.add(root);
@@ -76,42 +80,88 @@ public class AllAboutTrees {
 	}
 
 	private TreeNode ctci4_3(int[] arr, int start, int end) {
-		
+
 		if(end<start)
 			return null;
 		int mid = (start+end)/2;
 		TreeNode node = new TreeNode(arr[mid]);
 		node.left = ctci4_3(arr, start, mid-1);
 		node.right = ctci4_3(arr, mid+1, end);
-		
+
 		return node;
 	}
 
 	private void inorderTraversal() {
 
-		Stack<TreeNode> inorderStack = new Stack<TreeNode>();
-
+		Stack<TreeNode> stack = new Stack<TreeNode>();
 		TreeNode temp = root;
+		if(root==null)
+			return;
 		while(temp!=null){
-			inorderStack.push(temp);
-			temp= temp.left;
+			stack.push(temp);
+			temp = temp.left;
 		}
-		while(!inorderStack.isEmpty()){
-			temp = inorderStack.pop();
-			System.out.println(temp.data);
+
+		while(!stack.isEmpty()){
+			temp = stack.pop();
+			System.out.print(" " +temp.data);
 			if(temp.right!=null){
-				temp =temp.right;
+				temp = temp.right;
 				while(temp!=null){
-					inorderStack.push(temp);
+					stack.push(temp);
 					temp = temp.left;
 				}
 			}
 		}
-
+	}
+	
+	
+	private void preOrder(){
+		System.out.println("\npreorder:---");
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+		TreeNode temp = root;
+		if(temp==null)
+			return;
+		stack.push(temp);
+		while(!stack.isEmpty()){
+			temp = stack.pop();
+			System.out.print(" " +temp.data);
+			if(temp.right!=null)
+				stack.push(temp.right);
+			if(temp.left!=null)
+				stack.push(temp.left);
+		}
+		
+	}
+	
+	private void postOrder(){
+		System.out.println("\n PostOrder:----");
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+		Stack<TreeNode> stack1 = new Stack<TreeNode>();
+ 		TreeNode temp = root;
+		if(temp==null)
+			return;
+		stack.push(temp);
+		while(!stack.isEmpty()){
+			temp = stack.pop();
+			if(temp.left!=null)
+				stack.push(temp.left);
+			if(temp.right!=null)
+				stack.push(temp.right);
+			stack1.push(temp);
+		}
+		while(!stack1.isEmpty()){
+			temp = stack1.pop();
+			System.out.print(" " + temp.data);
+		}
 	}
 
+
+	/*
+	 * Reccursive method for tree insertions.
+	 * */
 	private TreeNode addToTree(int data, TreeNode rootNode) {
-		
+
 		if(rootNode==null){
 			rootNode = new TreeNode(data);
 		}
@@ -122,7 +172,7 @@ public class AllAboutTrees {
 				rootNode.right = addToTree(data, rootNode.right);
 		}
 		return rootNode;
-			
+
 	}
 
 	private class TreeNode{
