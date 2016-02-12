@@ -42,9 +42,7 @@ public class AllAboutTrees {
 	}
 
 
-	/* Given a array of sorted data.
-	 * Create a binary tree with minimal height
-	 */
+	
 
 	private void DFSTraversal() {
 		System.out.println("\nDFS:---");
@@ -78,7 +76,10 @@ public class AllAboutTrees {
 				queueForBFS.add(temp.right);
 		}
 	}
-
+	
+	/* Given a array of sorted data.
+	 * Create a binary tree with minimal height
+	 */
 	private TreeNode ctci4_3(int[] arr, int start, int end) {
 
 		if(end<start)
